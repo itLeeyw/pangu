@@ -1,4 +1,4 @@
-export interface PackageJsonOption {
+interface PackageJsonOption {
   name: string,
   version: string,
   description?: string,
@@ -26,7 +26,7 @@ export interface PackageJsonOption {
   devDependencies?: object,
   peerDependencies?: object,
   peerDependenciesMeta?: object,
-  bundledDependencies?: object,
+  bundledDependencies?: string[],
   optionalDependencies?: object,
   engines?: object,
   os?: string[],
@@ -34,4 +34,8 @@ export interface PackageJsonOption {
   private?: boolean,
   publishConfig?: object,
   workspaces?: string[],
+}
+
+export {
+  PackageJsonOption
 }
