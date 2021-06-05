@@ -1,0 +1,19 @@
+{
+  "name": "pangu",
+  "version": "1.0.0",
+  "description": "A carding out project flow tool.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "keywords": [
+    "pangu"
+  ],
+  "author": "Leeyw",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^15.12.0",
+    "commander": "^7.2.0",
+    "typescript": "^4.3.2"
+  }
+}
