@@ -6,7 +6,8 @@
 
 ```bash
 $ git clone git@github.com:itLeeyw/pangu.git
-$ cd ./bin
+$ cd ./pangu/bin
+$ npm install
 $ node index.js cleave -p 你的项目路径
 ```
 
