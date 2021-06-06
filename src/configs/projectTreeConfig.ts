@@ -13,9 +13,18 @@ interface ProjectTreeOption {
   },
   projectDirName: string,
   basePath: string,
-  tree?: object
+  tree?: treeType
 }
 
+type treeType = {
+  name: string,
+  mtime: Date,
+  path: string,
+  children?: treeType[]
+}
+
+
 export {
-  ProjectTreeOption
+  ProjectTreeOption,
+  treeType
 }
