@@ -57,9 +57,7 @@ export default class Project {
       ...baseInfo,
       tree
     }
-    console.log('tree: ', this.projectTree);
-    const projectTree = util.deepClone(this.projectTree)// 深克隆 todo;
-
+    const projectTree = util.deepClone(this.projectTree);
     return projectTree as ProjectTreeOption;
   }
 
