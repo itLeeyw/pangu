@@ -1,6 +1,6 @@
 import { getJson, getFileName } from './fileUtil';
 import { isArrAinB } from './compareUtil';
-import { deepClone } from './memory';
+import { deepClone } from './memoryUtil';
 import { extArrayData } from './dataUtil';
 export {
   isArrAinB,
