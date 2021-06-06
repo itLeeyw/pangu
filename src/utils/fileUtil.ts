@@ -18,7 +18,6 @@ function getJson(jsonPath: string): object {
 function getFileName (path: string): string {
     // 将 (z:\xxx\yyy) --解析成--> (yyy)
     let pathArr = path.split('\\');                        // --> ['z:', 'xxx', 'yyy']
-    
     const name = pathArr[pathArr.length - 1];   // --> 'yyy'
     return name;
 }
