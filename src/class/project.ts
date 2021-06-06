@@ -15,8 +15,8 @@ export default class Project {
       this.path = path.resolve(projectPath);
   }
 
-  /**
- * 验证是否为合法项目
+  /** 验证是否为合法项目
+ * 
  * 一个项目必须有 project.json, 且必须有 "name"、"version" 字段
  * 若存在 project.json 则说明项目合法
  * @param projectPath 项目路径 
@@ -39,8 +39,8 @@ export default class Project {
     }
   }
   
-  /**
-   * 扫描项目生成项目树状结构
+  /** 扫描项目生成项目树状结构
+   * 
    * @returns 项目树
    */
   public generateProjectTree(): ProjectTreeOption {
@@ -57,11 +57,12 @@ export default class Project {
       ...baseInfo,
       tree
     }
+
     const projectTree = util.deepClone(this.projectTree);
     return projectTree as ProjectTreeOption;
   }
 
-  /**将 package.json 中 ProjectTree 所需要的属性 格式化成可以注入 ProjectTree 中的数据，并返回
+  /** 将 package.json 中 ProjectTree 所需要的属性 格式化成可以注入 ProjectTree 中的数据，并返回
    * 
    * @param packageJson 
    * @returns ProjectTreeOption
@@ -81,7 +82,7 @@ export default class Project {
     return json;
   }
 
-  /**解析出项目的根目录名称 & 项目路径，并返回
+  /** 解析出项目的根目录名称 & 项目路径，并返回
    * 
    * @returns object
    */
