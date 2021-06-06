@@ -11,3 +11,5 @@ $ npm install
 $ node index.js cleave -p 你的项目路径
 ```
 
+盘古开发文档：https://docs.qq.com/doc/DU1FUSnhBQmRpbEZM
+盘古TodoList: https://docs.qq.com/sheet/DU1RoWGZVdEVIUm1w?tab=BB08J2
