@@ -10,9 +10,20 @@ function getJson(jsonPath: string): object {
   return json;
 }
 
-
-
+/** 输入路径获取文件名
+ * 
+ * @param path 
+ * @returns 
+ */
+function getFileName (path: string): string {
+    // 将 (z:\xxx\yyy) --解析成--> (yyy)
+    let pathArr = path.split('\\');                        // --> ['z:', 'xxx', 'yyy']
+    
+    const name = pathArr[pathArr.length - 1];   // --> 'yyy'
+    return name;
+}
 
 export {
-  getJson
+  getJson,
+  getFileName
 }

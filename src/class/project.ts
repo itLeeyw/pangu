@@ -1,15 +1,18 @@
 import fs from 'fs';
+import path from 'path';
 import { 
   FILE_PROJECT_JSON,
-  PackageJsonOption, ProjectTreeOption 
+  PackageJsonOption, ProjectTreeOption,
+  treeType 
  } from '../configs/configs';
 import * as util from '../utils/utils';
 export default class Project {
   private projectTree: ProjectTreeOption = {} as ProjectTreeOption;
   private path: string;
+  private extFiles: object= {'.git': true, 'node_modules': true}; 
 
   constructor (projectPath: string) {
-      this.path = projectPath;
+      this.path = path.resolve(projectPath);
   }
 
   /**
@@ -35,7 +38,6 @@ export default class Project {
       return false;
     }
   }
-
   
   /**
    * 扫描项目生成项目树状结构
@@ -48,14 +50,14 @@ export default class Project {
     
     const packageJsonInfo = this.formatPackageJson(packageJson);
     const baseInfo = this.formatBaseInfo();
-    const tree = this.formatProjectTree();
+    const tree: treeType = this.formatProjectTree();
 
     this.projectTree = {
       ...packageJsonInfo,
       ...baseInfo,
       tree
     }
-
+    console.log('tree: ', this.projectTree);
     const projectTree = util.deepClone(this.projectTree)// 深克隆 todo;
 
     return projectTree as ProjectTreeOption;
@@ -87,12 +89,7 @@ export default class Project {
    */
   private formatBaseInfo (): object {
     const basePath = this.path;
-    
-    // 将 (../../xxx/) --解析成--> (xxx)
-    const path = this.path;                               // --> ../../xxx/
-    let pathArr = path.split('/');                        // --> ['..', '..', 'xxx', '']
-        pathArr.pop();                                    // --> [['..', '..', 'xxx']
-    const projectDirName = pathArr[pathArr.length - 1];   // --> 'xxx'
+    const projectDirName = util.getFileName(basePath);
                       
     return {
       basePath,
@@ -105,9 +102,47 @@ export default class Project {
    * 
    * @returns 
    */
-  private formatProjectTree(): object{
-    // todo
-    return {};
+  private formatProjectTree(): treeType{
+    const projectRoot = this.path;
+    const tree: treeType = this.getFileTree(projectRoot);
+    this.getProjectDir(projectRoot, tree);
+    return tree;
+  }
+
+  private getProjectDir(dirPath: string, curTree: treeType) {
+    let curDirChildren = fs.readdirSync(dirPath);
+    if (curDirChildren.length === 0) return;
+
+    curTree.children = [];
+    // 清除数组中指定元素
+    curDirChildren = util.extArrayData(curDirChildren, this.extFiles);
+    
+    const childrenLen = curDirChildren.length;
+    for (let i = 0; i < childrenLen; i++) {
+      const file = curDirChildren[i];
+      const filePath = path.join(dirPath, file);
+      const fileInfo = fs.statSync(filePath);
+      const fileTree: treeType = this.getFileTree(filePath);
+      if (fileInfo.isDirectory()) {
+        curTree.children.push(fileTree);
+        this.getProjectDir(filePath, fileTree);
+      } else {
+        curTree.children.push(fileTree)
+      }
+    }
+  }
+
+  /** 获取单文件的 tree 结构
+   * 
+   * @param path 
+   * @returns 
+   */
+  private getFileTree(path: string): treeType {
+    return {
+      name: util.getFileName(path), 
+      mtime: fs.statSync(path).mtime,
+      path: path
+     }
   }
 
 }
