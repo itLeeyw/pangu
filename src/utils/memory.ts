@@ -6,11 +6,11 @@ import { NATIVE_TYPE } from '../configs/configs';
  */
 function deepClone(O: any): object {
   const toStr = Object.prototype.toString;
-  if (toStr.call(O) === NATIVE_TYPE.undefined) return O;
-  if (toStr.call(O) === NATIVE_TYPE.null) return O;
-  if (toStr.call(O) === NATIVE_TYPE.date) return new Date(O);
-  if (toStr.call(O) === NATIVE_TYPE.regexp) return new RegExp(O);
-  if (toStr.call(O) !== NATIVE_TYPE.object) return O;
+  if (toStr.call(O) === NATIVE_TYPE.undefined)  return O;
+  if (toStr.call(O) === NATIVE_TYPE.null)       return O;
+  if (toStr.call(O) === NATIVE_TYPE.date)       return new Date(O);
+  if (toStr.call(O) === NATIVE_TYPE.regexp)     return new RegExp(O);
+  if (toStr.call(O) !== NATIVE_TYPE.object)     return O;
 
   let target = new O.constructor();
   for (let k in O) {
