@@ -11,6 +11,6 @@ export default function cleave(options: ProjectOption): void {
   const project = new Project(projectPath);
   
   // 递归扫描文件生成一个树状图
-  const projectTree: ProjectTreeOption = project.scanProjectDir2Tree();
+  const projectTree: ProjectTreeOption = project.generateProjectTree();
   console.log(projectTree);
 }
