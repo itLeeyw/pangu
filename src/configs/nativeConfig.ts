@@ -7,6 +7,8 @@ const NATIVE_TYPE = {
   'symbol':     '[object Symbol]',
   'object':     '[object Object]',
   'function':   '[object Function]',
+  'regexp':     '[object RegExp]',
+  'date':       '[object Date]',
   'bigint':     '[object BigInt]',
 }
 
